@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b454vg73l24ni"]
+
+[ext_resource type="PackedScene" uid="uid://dthcubtngkkj3" path="res://assets/bowlmangkok_ayam_jago.glb" id="1_nnqjb"]
+
+[node name="Bowl_Baru" instance=ExtResource("1_nnqjb")]
+
+[node name="Mangkok" parent="Sketchfab_model/31226912dbfb4a51887eebc4c0f24956_fbx/RootNode" index="0"]
+transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, -8.17389, 106.927, -8.50248)

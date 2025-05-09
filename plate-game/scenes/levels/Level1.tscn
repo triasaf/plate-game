@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://bp1wgx1u74yxv"]
+
+[ext_resource type="Script" path="res://scenes/levels/level_controller.gd" id="1_ft4f4"]
+[ext_resource type="PackedScene" uid="uid://cm6kjjh0l6tus" path="res://scenes/objects/Table.tscn" id="2_26jrv"]
+[ext_resource type="PackedScene" uid="uid://ds56erayxr5gl" path="res://scenes/objects/PlateBaru.tscn" id="3_uwatn"]
+[ext_resource type="PackedScene" uid="uid://dyslt4nw1cy6c" path="res://scenes/objects/Bowl_jago.tscn" id="4_6f1xe"]
+[ext_resource type="PackedScene" uid="uid://cfj1fxa66h0lq" path="res://scenes/objects/TutupBaru.tscn" id="5_rfijq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_31h5t"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_5ma12"]
+sky_material = SubResource("ProceduralSkyMaterial_31h5t")
+
+[sub_resource type="Environment" id="Environment_lhsk1"]
+background_mode = 2
+sky = SubResource("Sky_5ma12")
+tonemap_mode = 2
+
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("cameras", "tutup_saji", "feedback_label")]
+script = ExtResource("1_ft4f4")
+cameras = [NodePath("Camera3D"), NodePath("Camera3D2"), NodePath("Camera3D3"), NodePath("Camera3D4")]
+tutup_saji = NodePath("TutupBaru")
+feedback_label = NodePath("Label3D")
+
+[node name="Table" parent="." instance=ExtResource("2_26jrv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38402, 0)
+
+[node name="Plate" parent="." groups=["Draggable"] instance=ExtResource("3_uwatn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.481144, -0.471439)
+
+[node name="Plate2" parent="." groups=["Draggable"] instance=ExtResource("3_uwatn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05585, 0.361286, -5.55238)
+
+[node name="Plate3" parent="." groups=["Draggable"] instance=ExtResource("3_uwatn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26593, 0.481144, -6.13194)
+
+[node name="Plate4" parent="." groups=["Draggable"] instance=ExtResource("3_uwatn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.208787, 1.16936, -3.7009)
+
+[node name="BowlJago" parent="." groups=["Draggable"] instance=ExtResource("4_6f1xe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18673, 0.85701, -1.35355)
+
+[node name="BowlJago3" parent="." groups=["Draggable"] instance=ExtResource("4_6f1xe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72287, 0.482052, 0.393664)
+
+[node name="BowlJago2" parent="." groups=["Draggable"] instance=ExtResource("4_6f1xe")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18673, 0.561839, 1.7869)
+
+[node name="Camera3D" type="Camera3D" parent="." groups=["LevelCameras"]]
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 5.19147, -2.63594)
+
+[node name="Camera3D2" type="Camera3D" parent="." groups=["LevelCameras"]]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3.19147, 5.36406)
+
+[node name="Camera3D3" type="Camera3D" parent="." groups=["LevelCameras"]]
+transform = Transform3D(-1, -4.37114e-08, 7.57103e-08, 0, 0.866025, 0.5, -8.74228e-08, 0.5, -0.866025, 0, 3.19147, -9.63594)
+
+[node name="Camera3D4" type="Camera3D" parent="." groups=["LevelCameras"]]
+transform = Transform3D(-4.37114e-08, 0.5, -0.866025, 0, 0.866025, 0.5, 1, 2.18557e-08, -3.78552e-08, -6, 3.19147, -2.63594)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 8.88178e-16, 2.98023e-08, -2.98023e-08, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_lhsk1")
+
+[node name="TutupBaru" parent="." instance=ExtResource("5_rfijq")]
+transform = Transform3D(-2.62268e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.62268e-08, -1.00967, 0.899503, -2.99992)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 388.0
+offset_right = 423.0
+offset_bottom = 627.0
+text = "Click the plates to start dragging them!
+Press W or S to lift or lower the plates
+Click again to release the plates
+
+Press R to Reload the level
+
+Press Shift to change view
+
+Press Enter to Submit "
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 210.0
+offset_right = 422.0
+offset_bottom = 293.0
+text = "Get all the plates inside the Area!
+Make sure they are standing upright!"
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(-0.0328761, 0, -0.999459, 0, 1, 0, 0.999459, 0, -0.0328761, -3.04561, 2.68918, -2.37297)
