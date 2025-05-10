@@ -1,107 +1,129 @@
-[gd_scene load_steps=9 format=3 uid="uid://bp1wgx1u74yxv"]
+[gd_scene load_steps=11 format=3 uid="uid://bp1wgx1u74yxv"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_controller.gd" id="1_ft4f4"]
 [ext_resource type="PackedScene" uid="uid://cm6kjjh0l6tus" path="res://scenes/objects/Table.tscn" id="2_26jrv"]
 [ext_resource type="PackedScene" uid="uid://ds56erayxr5gl" path="res://scenes/objects/PlateBaru.tscn" id="3_uwatn"]
 [ext_resource type="PackedScene" uid="uid://dyslt4nw1cy6c" path="res://scenes/objects/Bowl_jago.tscn" id="4_6f1xe"]
 [ext_resource type="PackedScene" uid="uid://cfj1fxa66h0lq" path="res://scenes/objects/TutupBaru.tscn" id="5_rfijq"]
+[ext_resource type="PackedScene" uid="uid://bva0ancug8nug" path="res://scenes/ui/guide_ui.tscn" id="6_7jppx"]
+[ext_resource type="PackedScene" uid="uid://c7i6dko27g6nb" path="res://scenes/objects/Environment.tscn" id="6_o0xbu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_31h5t"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 
-[sub_resource type="Sky" id="Sky_5ma12"]
+[sub_resource type="Sky" id="Sky_kmurc"]
 sky_material = SubResource("ProceduralSkyMaterial_31h5t")
 
 [sub_resource type="Environment" id="Environment_lhsk1"]
 background_mode = 2
-sky = SubResource("Sky_5ma12")
+sky = SubResource("Sky_kmurc")
 tonemap_mode = 2
 
-[node name="Level1" type="Node3D" node_paths=PackedStringArray("cameras", "tutup_saji", "feedback_label")]
+[node name="Level1" type="Node3D" node_paths=PackedStringArray("cameras", "tutup_saji", "feedback_label", "guide_ui")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.2495, -0.0140517, -17.7709)
 script = ExtResource("1_ft4f4")
-cameras = [NodePath("Camera3D"), NodePath("Camera3D2"), NodePath("Camera3D3"), NodePath("Camera3D4")]
+cameras = [NodePath("Camera3D4"), NodePath("Camera3D"), NodePath("Camera3D2"), NodePath("Camera3D3")]
 tutup_saji = NodePath("TutupBaru")
 feedback_label = NodePath("Label3D")
+guide_ui = NodePath("Guide UI")
+level = 1
 
 [node name="Table" parent="." instance=ExtResource("2_26jrv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38402, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.3925, -2.38402, 20.6922)
 
 [node name="Plate" parent="." groups=["Draggable"] instance=ExtResource("3_uwatn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.481144, -0.471439)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.3925, 0.481144, 20.2208)
 
 [node name="Plate2" parent="." groups=["Draggable"] instance=ExtResource("3_uwatn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.05585, 0.361286, -5.55238)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.3367, 0.361286, 15.1398)
 
 [node name="Plate3" parent="." groups=["Draggable"] instance=ExtResource("3_uwatn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.26593, 0.481144, -6.13194)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.6584, 0.481144, 14.5603)
 
 [node name="Plate4" parent="." groups=["Draggable"] instance=ExtResource("3_uwatn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.208787, 1.16936, -3.7009)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.1837, 1.16936, 16.9913)
 
 [node name="BowlJago" parent="." groups=["Draggable"] instance=ExtResource("4_6f1xe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18673, 0.85701, -1.35355)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5792, 0.85701, 19.3386)
 
 [node name="BowlJago3" parent="." groups=["Draggable"] instance=ExtResource("4_6f1xe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72287, 0.482052, 0.393664)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.6696, 0.482052, 21.0859)
 
 [node name="BowlJago2" parent="." groups=["Draggable"] instance=ExtResource("4_6f1xe")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18673, 0.561839, 1.7869)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5792, 0.561839, 22.4791)
 
 [node name="Camera3D" type="Camera3D" parent="." groups=["LevelCameras"]]
-transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, 0, 5.19147, -2.63594)
+transform = Transform3D(-4.37114e-08, -1, -4.37114e-08, 0, -4.37114e-08, 1, -1, 4.37114e-08, 1.91069e-15, -27.3925, 5.19147, 18.0562)
 
 [node name="Camera3D2" type="Camera3D" parent="." groups=["LevelCameras"]]
-transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3.19147, 5.36406)
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, -27.3925, 3.19147, 23.7968)
 
 [node name="Camera3D3" type="Camera3D" parent="." groups=["LevelCameras"]]
-transform = Transform3D(-1, -4.37114e-08, 7.57103e-08, 0, 0.866025, 0.5, -8.74228e-08, 0.5, -0.866025, 0, 3.19147, -9.63594)
+transform = Transform3D(-1, -4.37114e-08, 7.57104e-08, 0, 0.866025, 0.5, -8.74228e-08, 0.5, -0.866025, -27.3925, 3.19147, 13.0563)
 
 [node name="Camera3D4" type="Camera3D" parent="." groups=["LevelCameras"]]
-transform = Transform3D(-4.37114e-08, 0.5, -0.866025, 0, 0.866025, 0.5, 1, 2.18557e-08, -3.78552e-08, -6, 3.19147, -2.63594)
+transform = Transform3D(-4.37114e-08, 0.5, -0.866025, 0, 0.866025, 0.5, 1, 2.18557e-08, -3.78552e-08, -33.3925, 3.19147, 18.0562)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 8.88178e-16, 2.98023e-08, -2.98023e-08, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 9, 0)
+transform = Transform3D(1, -1.3027e-15, 2.98023e-08, -2.98023e-08, -4.37114e-08, 1, 0, -1, -4.37114e-08, -27.3925, 9, 20.6922)
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lhsk1")
 
 [node name="TutupBaru" parent="." instance=ExtResource("5_rfijq")]
-transform = Transform3D(-2.62268e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.62268e-08, -1.00967, 0.899503, -2.99992)
+transform = Transform3D(-2.62268e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.62268e-08, -27.4022, 0.899503, 17.2719)
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Control"]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 388.0
-offset_right = 423.0
-offset_bottom = 627.0
-text = "Click the plates to start dragging them!
-Press W or S to lift or lower the plates
-Click again to release the plates
-
-Press R to Reload the level
-
-Press Shift to change view
-
-Press Enter to Submit "
-
-[node name="RichTextLabel2" type="RichTextLabel" parent="Control"]
-layout_mode = 0
-offset_left = 26.0
-offset_top = 210.0
-offset_right = 422.0
-offset_bottom = 293.0
-text = "Get all the plates inside the Area!
-Make sure they are standing upright!"
+[node name="Guide UI" parent="." instance=ExtResource("6_7jppx")]
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(-0.0328761, 0, -0.999459, 0, 1, 0, 0.999459, 0, -0.0328761, -3.04561, 2.68918, -2.37297)
+transform = Transform3D(-0.0328761, 0, -0.999459, 0, 1, 0, 0.999459, 0, -0.0328761, -30.4381, 2.68918, 18.3192)
+
+[node name="Environment" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6357, -5.39746, -2.25258)
+
+[node name="Environment2" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6357, -5.39746, 12.9895)
+
+[node name="Environment3" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6357, -5.39746, 28.266)
+
+[node name="Environment4" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.6357, -5.39746, 43.5082)
+
+[node name="Environment5" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3749, -5.39746, -2.25258)
+
+[node name="Environment6" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3749, -5.39746, 12.9895)
+
+[node name="Environment7" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3749, -5.39746, 28.266)
+
+[node name="Environment8" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.3749, -5.39746, 43.5082)
+
+[node name="Environment9" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.9017, -5.39746, -2.25258)
+
+[node name="Environment10" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.9017, -5.39746, 12.9895)
+
+[node name="Environment11" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.9017, -5.39746, 28.266)
+
+[node name="Environment12" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.9017, -5.39746, 43.5082)
+
+[node name="Environment13" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.6409, -5.39746, -2.25258)
+
+[node name="Environment14" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.6409, -5.39746, 12.9895)
+
+[node name="Environment15" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.6409, -5.39746, 28.266)
+
+[node name="Environment16" parent="." instance=ExtResource("6_o0xbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.6409, -5.39746, 43.5082)

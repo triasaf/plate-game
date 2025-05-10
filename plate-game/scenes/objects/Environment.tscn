@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7i6dko27g6nb"]
+
+[ext_resource type="Texture2D" uid="uid://6k7bfb72vuta" path="res://assets/photo-1678742755904-6c3fc8ba6602.jpg" id="1_ntkxh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uq4r7"]
+albedo_color = Color(0.556953, 0.556953, 0.556953, 1)
+albedo_texture = ExtResource("1_ntkxh")
+
+[node name="Environment" type="CSGCombiner3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(9.35745, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.59863)
+size = Vector3(1, 1, 8.19727)
+material = SubResource("StandardMaterial3D_uq4r7")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(9.35745, 0, 0, 0, 1, 0, 0, 0, 1, 9.34919, 0, 3.59863)
+size = Vector3(1, 1, 8.19727)
+material = SubResource("StandardMaterial3D_uq4r7")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(9.35745, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.51665)
+size = Vector3(1, 1, 8.19727)
+material = SubResource("StandardMaterial3D_uq4r7")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(9.35745, 0, 0, 0, 1, 0, 0, 0, 1, 9.36074, 0, -3.51665)
+size = Vector3(1, 1, 8.19727)
+material = SubResource("StandardMaterial3D_uq4r7")

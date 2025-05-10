@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bva0ancug8nug"]
+
+[node name="Guide UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Controls" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 262.0
+offset_right = 421.0
+offset_bottom = 633.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 20
+text = "Click the plates to start dragging them!
+Press W or S to lift or lower the plates
+Click again to release the plates
+
+Press R to Reload the level
+
+Press Shift to change view
+
+Press Enter to Submit 
+
+Press H to Hide/Show controls"
+
+[node name="Objective" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 19.0
+offset_right = 609.0
+offset_bottom = 151.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 20
+text = "Objectives:
+- Get all the plates inside the Area!
+- Make sure they are standing upright!
+- You cant directly stack 1 plate with another plate"

@@ -1,0 +1,100 @@
+[gd_scene load_steps=9 format=3 uid="uid://bef4f7aglpatf"]
+
+[ext_resource type="Script" path="res://scenes/ui/main_menu.gd" id="1_lgb7b"]
+[ext_resource type="PackedScene" uid="uid://dyslt4nw1cy6c" path="res://scenes/objects/Bowl_jago.tscn" id="1_wbtvu"]
+[ext_resource type="PackedScene" uid="uid://c7i6dko27g6nb" path="res://scenes/objects/Environment.tscn" id="3_k5sg5"]
+
+[sub_resource type="FontFile" id="FontFile_k4f0w"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/10/0/ascent = 0.0
+cache/0/10/0/descent = 0.0
+cache/0/10/0/underline_position = 0.0
+cache/0/10/0/underline_thickness = 0.0
+cache/0/10/0/scale = 1.0
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+
+[sub_resource type="FontFile" id="FontFile_icn5h"]
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_6sg62"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_5ma12"]
+sky_material = SubResource("ProceduralSkyMaterial_6sg62")
+
+[sub_resource type="Environment" id="Environment_avl75"]
+background_mode = 2
+sky = SubResource("Sky_5ma12")
+tonemap_mode = 2
+
+[node name="MainMenu" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("1_lgb7b")
+
+[node name="BowlJago" parent="." instance=ExtResource("1_wbtvu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000755787, 0.729627, 0.00270665)
+
+[node name="BowlJago2" parent="." instance=ExtResource("1_wbtvu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000755787, 1.72963, 0.00270665)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.550758, 0.250933, -0.796052, 0.834665, -0.165579, 0.525278, 7.25801e-09, -0.953738, -0.300639, -2.98594, 5.68846, 0)
+light_energy = 1.686
+shadow_enabled = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -33.0
+offset_right = 592.0
+offset_bottom = 33.0
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontFile_k4f0w")
+theme_override_font_sizes/font_size = 50
+text = "Start"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_fonts/font = SubResource("FontFile_icn5h")
+theme_override_font_sizes/font_size = 50
+text = "Quit"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.0452563, 0.0375493, -0.998269, 0.00175064, 0.999289, 0.037667, 0.998974, -0.00345227, 0.0451584, -2.46476, 1.1821, -1)
+
+[node name="Environment" parent="." instance=ExtResource("3_k5sg5")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_avl75")
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
