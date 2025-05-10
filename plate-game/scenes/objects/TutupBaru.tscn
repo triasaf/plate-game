@@ -1,7 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cfj1fxa66h0lq"]
-
-[ext_resource type="Script" path="res://scenes/objects/tutup_baru.gd" id="1_lvawx"]
-[ext_resource type="Script" path="res://scenes/objects/area_plates.gd" id="1_u1vch"]
+[gd_scene load_steps=9 format=3 uid="uid://cfj1fxa66h0lq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sgnlw"]
 transparency = 1
@@ -32,7 +29,6 @@ radius = 1.01602
 [node name="TutupBaru" type="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00967121, 0.987569, 8.44002e-05)
 material_override = SubResource("StandardMaterial3D_sgnlw")
-script = ExtResource("1_lvawx")
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.03547, 0.0146523)
@@ -111,7 +107,6 @@ radius = 2.86904
 radial_segments = 16
 
 [node name="Area3D" type="Area3D" parent="."]
-script = ExtResource("1_u1vch")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CylinderShape3D_eu4st")

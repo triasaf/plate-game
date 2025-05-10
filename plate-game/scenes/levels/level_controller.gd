@@ -39,6 +39,9 @@ var is_level_complete: bool = false
 
 @export var level: int
 
+# for cinematics
+@export var tutup_solid: CSGCombiner3D
+
 # Current active camera
 var camera: Camera3D
 
@@ -64,9 +67,20 @@ func _ready() -> void:
 	else:
 		push_warning("No feedback_label assigned. UI feedback will not be shown.")
 	
+	# Initialize tutup_saji and tutup_solid visibility
+	if tutup_saji:
+		tutup_saji.visible = true
+	else:
+		push_error("No tutup_saji assigned.")
+	if tutup_solid:
+		tutup_solid.visible = false
+	else:
+		push_error("No tutup_solid assigned.")
+	
 	# Initialize tracking
 	drag_count = 0
 	start_time = Time.get_ticks_msec() / 1000.0
+	
 
 func _input(event: InputEvent) -> void:
 	
@@ -93,6 +107,9 @@ func _input(event: InputEvent) -> void:
 	# Handle continue after failed submit
 	if is_waiting_for_continue and event.is_action_pressed("submit"):
 		is_waiting_for_continue = false
+		tutup_saji.visible = true
+		tutup_solid.visible = false
+		tutup_solid.global_position = tutup_saji.global_position + Vector3(0, 6, 0)
 		if feedback_label:
 			feedback_label.text = ""
 		return
@@ -241,13 +258,23 @@ func check_draggable_objects() -> void:
 			all_valid = false
 			continue
 	
+	# Create tween for tutup_solid animation
+	var tween = create_tween()
+	if tutup_saji and tutup_solid:
+		tutup_saji.visible = false
+		tutup_solid.visible = true
+		var target_pos = tutup_saji.global_position
+		tween.tween_property(tutup_solid, "global_position", target_pos, 1.0)
+	
 	if all_valid:
 		var elapsed_time = submit_time - start_time
 		is_level_complete = true
 		print("All draggable objects are inside the Area3D and upright! Drags: ", drag_count, ", Time: ", elapsed_time, "s")
 		if feedback_label:
 			switch_camera(0)
-			feedback_label.text = "Level Complete\nDrag Count: %d\nTime: %.1fs\nPress Enter to Continue" % [drag_count, elapsed_time]
+			tween.tween_callback(func():
+				feedback_label.text = "Level Complete\nDrag Count: %d\nTime: %.1fs\nPress Enter to Continue" % [drag_count, elapsed_time]
+			)
 		
 	else:
 		print("Some draggable objects are not inside the Area3D, intersecting AreaOutside, or not upright.")
@@ -256,10 +283,14 @@ func check_draggable_objects() -> void:
 			switch_camera(0)
 			if submit_count >= max_submit_count:
 				is_game_over = true
-				feedback_label.text = "YOU LOSE !!\nPress R to Retry"
+				tween.tween_callback(func():
+					feedback_label.text = "YOU LOSE !!\nPress R to Retry"
+				)
 			else:
 				is_waiting_for_continue = true
-				feedback_label.text = "Some plates are not fully inside the Area or not upright.\nKeep Trying! \nYou have %s tries left\nPress Enter to Continue" % [max_submit_count - submit_count]
+				tween.tween_callback(func():
+					feedback_label.text = "Some plates are not fully inside the Area or not upright.\nKeep Trying! \nYou have %s tries left\nPress Enter to Continue" % [max_submit_count - submit_count]
+				)
 
 func _find_nodes_in_group(group: String, node_prefix: String) -> Array:
 	var nodes: Array = []

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5wiuxoy88suq"]
+[gd_scene load_steps=12 format=3 uid="uid://c5wiuxoy88suq"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_controller.gd" id="1_mrysh"]
 [ext_resource type="PackedScene" uid="uid://cm6kjjh0l6tus" path="res://scenes/objects/Table.tscn" id="2_xhhpo"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dyslt4nw1cy6c" path="res://scenes/objects/Bowl_jago.tscn" id="5_jjnky"]
 [ext_resource type="PackedScene" uid="uid://bva0ancug8nug" path="res://scenes/ui/guide_ui.tscn" id="6_yd2gj"]
 [ext_resource type="PackedScene" uid="uid://c7i6dko27g6nb" path="res://scenes/objects/Environment.tscn" id="7_rfxy4"]
+[ext_resource type="PackedScene" uid="uid://cjlaofg0yolh6" path="res://scenes/objects/TutupSolid.tscn" id="8_7cdfa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f3dxi"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -20,13 +21,14 @@ background_mode = 2
 sky = SubResource("Sky_c8icr")
 tonemap_mode = 2
 
-[node name="Level2" type="Node3D" node_paths=PackedStringArray("cameras", "tutup_saji", "feedback_label", "guide_ui")]
+[node name="Level2" type="Node3D" node_paths=PackedStringArray("cameras", "tutup_saji", "feedback_label", "guide_ui", "tutup_solid")]
 script = ExtResource("1_mrysh")
 cameras = [NodePath("Camera3D4"), NodePath("Camera3D2"), NodePath("Camera3D3"), NodePath("Camera3D")]
 tutup_saji = NodePath("TutupBaru")
 feedback_label = NodePath("Label3D")
 guide_ui = NodePath("Guide UI")
 level = 2
+tutup_solid = NodePath("TutupSolid")
 
 [node name="Table" parent="." instance=ExtResource("2_xhhpo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.38402, 0)
@@ -41,7 +43,7 @@ transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 3.19147
 transform = Transform3D(-1, -4.37114e-08, 7.57104e-08, 0, 0.866025, 0.5, -8.74228e-08, 0.5, -0.866025, 0, 3.19147, -7.30328)
 
 [node name="Camera3D4" type="Camera3D" parent="." groups=["LevelCameras"]]
-transform = Transform3D(-4.37114e-08, 0.5, -0.866025, 0, 0.866025, 0.5, 1, 2.18557e-08, -3.78552e-08, -6, 3.19147, -2.63594)
+transform = Transform3D(-4.37114e-08, 0.5, -0.866025, 0, 0.866025, 0.5, 1, 2.18557e-08, -3.78552e-08, -5.08187, 3.19147, -2.63594)
 
 [node name="TutupBaru" parent="." instance=ExtResource("3_qifn7")]
 transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, -0.00967121, 0.943285, -0.762156)
@@ -108,7 +110,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64651, 2.18642, -3.43448)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.64651, 2.22113, 0.00270665)
 
 [node name="Label3D" type="Label3D" parent="."]
-transform = Transform3D(-0.0328761, 0, -0.999459, 0, 1, 0, 0.999459, 0, -0.0328761, -3.04561, 2.68918, -2.37297)
+transform = Transform3D(-0.0317559, 0.258819, -0.965403, 0.00850896, 0.965926, 0.258679, 0.999459, 0, -0.0328761, -2.91984, 2.52164, -2.37297)
 
 [node name="Guide UI" parent="." instance=ExtResource("6_yd2gj")]
 
@@ -159,3 +161,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.6409, -5.39746, 6.26604)
 
 [node name="Environment16" parent="." instance=ExtResource("7_rfxy4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.6409, -5.39746, 21.5082)
+
+[node name="TutupSolid" parent="." instance=ExtResource("8_7cdfa")]
+transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, -0.01, 6.7, -0.762)
