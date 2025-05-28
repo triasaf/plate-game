@@ -36,7 +36,7 @@ script = ExtResource("2_igtiy")
 limit = 5
 type = 3
 sound_effect = ExtResource("6_61b2b")
-volume = 3.0
+volume = 7.0
 pitch_scale = 1.0
 
 [node name="AudioManager" type="Node3D"]
