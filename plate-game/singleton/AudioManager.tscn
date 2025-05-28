@@ -1,0 +1,44 @@
+[gd_scene load_steps=11 format=3 uid="uid://brabj6eocklks"]
+
+[ext_resource type="Script" path="res://singleton/audio_manager.gd" id="1_t55sn"]
+[ext_resource type="Script" path="res://assets/sound_effect_setting.gd" id="2_igtiy"]
+[ext_resource type="AudioStream" uid="uid://bv34g4yktr3vx" path="res://assets/sfx/on_plate_placed.mp3" id="3_ja2mx"]
+[ext_resource type="AudioStream" uid="uid://brtfwgd833o65" path="res://assets/sfx/on_plate_pickup_faster.mp3" id="4_3l0t4"]
+[ext_resource type="AudioStream" uid="uid://d3komxxams3ik" path="res://assets/sfx/on_plate_drag.mp3" id="5_7wg6y"]
+[ext_resource type="AudioStream" uid="uid://oocmof5acowt" path="res://assets/sfx/www.zapsplat.com - on_cover_placed.mp3" id="6_61b2b"]
+
+[sub_resource type="Resource" id="Resource_42yid"]
+script = ExtResource("2_igtiy")
+limit = 5
+type = 2
+sound_effect = ExtResource("3_ja2mx")
+volume = 3.0
+pitch_scale = 1.0
+
+[sub_resource type="Resource" id="Resource_mutja"]
+script = ExtResource("2_igtiy")
+limit = 5
+type = 0
+sound_effect = ExtResource("4_3l0t4")
+volume = 3.0
+pitch_scale = 1.0
+
+[sub_resource type="Resource" id="Resource_kxy0j"]
+script = ExtResource("2_igtiy")
+limit = 5
+type = 1
+sound_effect = ExtResource("5_7wg6y")
+volume = 2.0
+pitch_scale = 1.3
+
+[sub_resource type="Resource" id="Resource_pdlu2"]
+script = ExtResource("2_igtiy")
+limit = 5
+type = 3
+sound_effect = ExtResource("6_61b2b")
+volume = 3.0
+pitch_scale = 1.0
+
+[node name="AudioManager" type="Node3D"]
+script = ExtResource("1_t55sn")
+sound_effects = Array[ExtResource("2_igtiy")]([SubResource("Resource_42yid"), SubResource("Resource_mutja"), SubResource("Resource_kxy0j"), SubResource("Resource_pdlu2")])

@@ -22,6 +22,12 @@ var submit_time: float = 0.0
 var submit_count: int = 0
 var max_submit_count: int = 3
 
+# Mouse velocity tracking for drag sound
+var last_mouse_screen_pos: Vector2 = Vector2.ZERO
+var mouse_velocity: float = 0.0
+var was_above_threshold: bool = false
+const VELOCITY_THRESHOLD: float = 150  # Pixels per second to trigger sound
+
 # State variables
 var is_waiting_for_continue: bool = false
 var is_game_over: bool = false
@@ -44,6 +50,10 @@ var is_level_complete: bool = false
 
 # Current active camera
 var camera: Camera3D
+
+func tutup_solid_closed():
+	AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_COVER_PLACED)
+	
 
 func _ready() -> void:
 	# Initialize cameras
@@ -80,6 +90,9 @@ func _ready() -> void:
 	# Initialize tracking
 	drag_count = 0
 	start_time = Time.get_ticks_msec() / 1000.0
+	
+	# Initialize last mouse position
+	last_mouse_screen_pos = get_viewport().get_mouse_position()
 	
 
 func _input(event: InputEvent) -> void:
@@ -126,6 +139,7 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	_update_drag(delta)
+	_update_mouse_velocity(delta)
 
 func _handle_drag_input(event: InputEvent) -> void:
 	# Mouse movement updates position
@@ -148,6 +162,10 @@ func toggle_drag() -> void:
 	if is_dragging:
 		# Release object
 		if dragging_collider:
+			# play sfx on plate placed
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLATE_PLACED)
+			AudioManager.stop_drag_audio()  # Stop drag sound
+			
 			dragging_collider.set_collision_layer_value(1, true)
 			dragging_collider = null
 		is_dragging = false
@@ -156,6 +174,9 @@ func toggle_drag() -> void:
 		# Try to grab new object
 		var intersect = get_mouse_intersect(get_viewport().get_mouse_position())
 		if intersect and intersect.collider is RigidBody3D and intersect.collider.is_in_group("Draggable"):
+			# play sfx on plate pickup
+			AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLATE_PICKUP)
+			
 			dragging_collider = intersect.collider
 			dragging_collider.set_collision_layer_value(1, false)
 			dragging_collider.rotation = Vector3.ZERO  # Reset all rotation
@@ -184,6 +205,31 @@ func _update_drag(delta: float) -> void:
 			target_pos,
 			DRAG_SMOOTH * delta
 		)
+
+func _update_mouse_velocity(delta: float) -> void:
+	var current_mouse_pos = get_viewport().get_mouse_position()
+	var distance = current_mouse_pos.distance_to(last_mouse_screen_pos)
+	mouse_velocity = distance / delta if delta > 0 else 0.0
+	last_mouse_screen_pos = current_mouse_pos
+	
+	# Update drag sound if dragging
+	if is_dragging:
+		var min_velocity = VELOCITY_THRESHOLD
+		var max_velocity = 1000.0
+		var min_pitch = 0.5
+		var max_pitch = 2.0
+		var normalized_velocity = clamp((mouse_velocity - min_velocity) / (max_velocity - min_velocity), 0.0, 1.0)
+		var pitch_scale = lerp(min_pitch, max_pitch, normalized_velocity)
+		
+		# Check if velocity crosses the threshold
+		if mouse_velocity >= VELOCITY_THRESHOLD and not was_above_threshold:
+			AudioManager.start_or_restart_drag_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_PLATE_DRAG, pitch_scale)
+			was_above_threshold = true
+		elif mouse_velocity >= VELOCITY_THRESHOLD and was_above_threshold:
+			AudioManager.update_drag_audio_pitch(pitch_scale)
+		elif mouse_velocity < VELOCITY_THRESHOLD and was_above_threshold:
+			AudioManager.stop_drag_audio()
+			was_above_threshold = false
 
 func _handle_camera_input(event: InputEvent) -> void:
 	if event.is_action_pressed("switch_camera"):
@@ -265,6 +311,14 @@ func check_draggable_objects() -> void:
 		tutup_solid.visible = true
 		var target_pos = tutup_saji.global_position
 		tween.tween_property(tutup_solid, "global_position", target_pos, 1.0)
+		# Periodically check distance during tween
+		var sound_played = false
+		tween.tween_callback(func():
+			if !sound_played and tutup_solid.global_position.distance_to(target_pos) < 1.3:
+				AudioManager.create_audio(SoundEffect.SOUND_EFFECT_TYPE.ON_COVER_PLACED)
+				sound_played = true
+		)
+			
 	
 	if all_valid:
 		var elapsed_time = submit_time - start_time

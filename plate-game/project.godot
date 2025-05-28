@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 AudioPlayer="*res://scenes/levels/audio_player.gd"
+AudioManager="*res://singleton/AudioManager.tscn"
 
 [input]
 
